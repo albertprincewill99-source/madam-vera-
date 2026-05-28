@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madam Vera Cart</title>
+</head>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+  <style>
+  /* ===== GLASS BACKGROUND ===== */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.9)),
+  url("lip.jpg") center/cover no-repeat;
+  z-index:-2;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  backdrop-filter:blur(0px);
+  z-index:-1;
+}
+  </style>
+<body>
+  <div class="header">
+    <div class="logo">Madam Vera</div>
+    <div class="right-icons">
+      <div class="cart-wrapper" onclick="goCart()">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="cart-count">0</span>
+      </div>
+      <a class="women" href="mensection.html">return</a>
+      <a class="back" href="index.html">Home</a>
+    </div>
+  </div>
+</boxer>

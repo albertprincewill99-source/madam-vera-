@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madam Vera - Unisex Fashion</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Lobster&display=swap" rel="stylesheet">
+    <script defer src="apple.js"></script>
+  <link rel="stylesheet" href="g.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+ <header class="header">
+  <h1 class="logo">Madam Vera</h1>
+  
+
+ <div class="menu" onclick="toggleMenu(event)">☰</div>
+</header>
+<!-- OVERLAY (IMPORTANT) -->
+<div id="overlay" class="overlay-bg"></div>
+
+
+<!-- SIDE NAV -->
+<div id="sidenav" class="sidenav">
+  <a href="index.html">Home</a>
+  <a href="mensection.html">men</a>
+  <a href="contact.html">Contact</a>
+  <a href="sheo.html">shoe</a>
+  <a href="bag.html">bag</a>
+  <a href="access.html">accessory</a>
+  <a href="casual.html">casual</a>
+  <a href="gown.html">dress</a>
+  <a href="Jean.html">trousers</a>
+  <a href="Womensuit.html">suit</a>
+</div>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="overlay"></div>
+
+    <div class="content">
+      <h2>Madam Vera</h2>
+      <p>Madam Vera<br>unisex fashion.<br>U.S.A</p>
+
+      <a href="contact.html" class="call-btn">📞</a>
+    </div>
+
+    <!-- DISCOUNT -->
+   
+
+    <!-- PRODUCT GRID (FLOATING) -->
+    <div class="product-grid">
+
+      <a href="gown.html" class="product-item">
+        <img src="6.jpg" class="product-img">
+        <div class="bookmark">dress</div>
+      </a>
+
+      <a href="Jean.html" class="product-item">
+        <img src="2.jpg" class="product-img">
+        <div class="bookmark">Trousers</div>
+      </a>
+
+      <a href="access.html" class="product-item">
+        <img src="5.jpg" class="product-img">
+        <div class="bookmark">accessories</div>
+      </a>
+
+      <a href="casual.html" class="product-item">
+        <img src="1.jpg" class="product-img">
+        <div class="bookmark">Casual</div>
+      </a>
+
+      <a href="Womensuit.html" class="product-item">
+        <img src="52.jpg" class="product-img">
+        <div class="bookmark">Suit</div>
+      </a>
+
+      <a href="bag.html" class="product-item">
+        <img src="tue.jpg" class="product-img">
+        <div class="bookmark">Bag</div>
+      </a>
+      
+      <a href="shoe.html" class="product-item">
+        <img src="E.jpg" class="product-img">
+        <div class="bookmark">shoe</div>
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- WHATSAPP BUTTON -->
+  <a href="https://wa.me/2348131849565" class="whatsapp" target="_blank">💬</a>
+
+  <!-- CREATOR ID -->
+<div class="creator-id">
+  <div class="creator-glow"></div>
+
+  <h3>Designed by Albert Princewill</h3>
+
+  <p>
+    Frontend Developer • UI Designer • Creative Builder
+  </p>
+
+  <a href="Glass.html">
+    Contact Me
+  </a>
+</div>
+  
+</body>
+  <style>
+    /* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #000;
+  color: #fff;
+}
+
+/* HEADER */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.logo {
+  font-family: 'Lobster', cursive;
+  font-size: 30px;
+  background: linear-gradient(90deg, #ff2e88, #7a2cff, #ff4dc4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* MENU */
+.menu {
+  font-size: 28px;
+  cursor: pointer;
+  color: #ff2e88;
+}
+
+/* SIDE NAV */
+.sidenav {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background: rgba(20,20,20,0.95);
+  backdrop-filter: blur(10px);
+  padding-top: 70px;
+  transition: 0.3s;
+  z-index: 1100;
+}
+.sidenav {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100vh;
+
+  background: #111;
+  transition: 0.3s;
+
+  overflow-y: auto;   /* 👈 THIS enables scrolling */
+  padding-bottom: 20px;
+}
+
+.sidenav a {
+  display: block;
+  padding: 15px 25px;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.sidenav a:hover {
+  background: #333;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background: url('you.jpg') center/cover no-repeat;
+}
+
+/* DARK OVERLAY */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(0,0,0,0.3), rgba(0,0,0,0.85));
+  z-index: 1;
+}
+
+/* CONTENT */
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 100px 20px 20px;
+}
+
+/* CALL BUTTON */
+.call-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, #ff2e88, #7a2cff);
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  box-shadow: 0 10px 25px rgba(255,46,136,0.3);
+}
+
+/* PRODUCT GRID */
+.product-grid {
+  position: absolute;
+  top: 69%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  z-index: 2;
+  width: 100%;
+  max-width: 380px;
+}
+
+/* PRODUCT ITEM */
+.product-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+/* IMAGE */
+.product-img {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255,255,255,0.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+  transition: 0.3s;
+}
+
+.product-img:hover {
+  transform: scale(1.08);
+}
+
+/* LABEL */
+.bookmark {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ff2e88, #7a2cff);
+  color: white;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+/* WHATSAPP BUTTON */
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff2e88, #ff4dc4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(255,77,196,0.4);
+  z-index: 1200;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .product-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .product-grid {
+    max-width: 320px;
+    gap: 12px;
+  }
+}
+
+/* ========================= */
+/* CREATOR ID (FIXED MINI GLASS BADGE) */
+/* ========================= */
+
+.creator-id{
+  position: fixed;
+  bottom: 355px;
+  left: 70%;
+  transform: translateX(-50%);
+
+  width: auto;
+  max-width: 260px;
+
+  padding: 1px 1px;
+
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+
+  backdrop-filter: blur(18px);
+
+  z-index: 3000;
+
+  text-align: center;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+
+  animation: floatId 6s ease-in-out infinite;
+}
+
+/* FLOAT EFFECT */
+@keyframes floatId{
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-6px); }
+}
+
+/* TITLE */
+.creator-id h3{
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+
+  background: linear-gradient(to right, #ff77c8, #c084ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* TEXT */
+.creator-id p{
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 8px;
+}
+
+/* BUTTON */
+.creator-id a{
+  display: inline-block;
+  padding: 7px 14px;
+  font-size: 0.75rem;
+  border-radius: 12px;
+
+  text-decoration: none;
+  color: white;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,105,180,0.85),
+    rgba(138,43,226,0.85)
+  );
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  transition: 0.3s ease;
+}
+
+.creator-id a:hover{
+  transform: scale(1.05);
+}
+  </style>
+</body>
+</html>
