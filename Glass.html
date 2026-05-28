@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Albert Princewill | Contact</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"/>
+
+</head>
+<style>
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+
+  font-family:'Poppins',sans-serif;
+
+  background:
+  radial-gradient(circle at top, rgba(255,0,150,0.18), transparent 35%),
+  radial-gradient(circle at bottom, rgba(120,60,255,0.22), transparent 40%),
+  #050505;
+
+  color:#fff;
+}
+
+/* BACKGROUND GLOW */
+.bg{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.bg::before,
+.bg::after{
+  content:"";
+  position:absolute;
+  width:420px;
+  height:420px;
+  border-radius:50%;
+  filter:blur(120px);
+  opacity:0.22;
+}
+
+.bg::before{
+  background:#ff2ea6;
+  top:-140px;
+  left:-140px;
+}
+
+.bg::after{
+  background:#7a3cff;
+  bottom:-140px;
+  right:-140px;
+}
+
+/* CARD */
+.card{
+  position:relative;
+  width:92%;
+  max-width:420px;
+  max-height:92vh;
+  overflow-y:auto;
+
+  padding:28px 22px;
+
+  border-radius:34px;
+
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  backdrop-filter:blur(24px);
+
+  box-shadow:
+  0 0 40px rgba(255,0,150,0.18),
+  0 0 80px rgba(120,60,255,0.12),
+  0 25px 80px rgba(0,0,0,0.6);
+}
+
+/* NEON EDGE */
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:34px;
+  padding:1px;
+
+  background:linear-gradient(135deg,#ff2ea6,#7a3cff,#ff6bd6);
+
+  -webkit-mask:
+  linear-gradient(#fff 0 0) content-box,
+  linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+
+  pointer-events:none;
+}
+
+/* PROFILE */
+.profile{
+  display:flex;
+  justify-content:center;
+}
+
+.avatar{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  padding:4px;
+
+  background:linear-gradient(135deg,#ff2ea6,#7a3cff,#ff6bd6);
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid rgba(0,0,0,0.75);
+}
+
+/* NAME */
+.name{
+  margin-top:18px;
+  text-align:center;
+  font-size:1.85rem;
+  font-weight:600;
+}
+
+.role{
+  text-align:center;
+  margin-top:6px;
+  font-size:0.9rem;
+  color:rgba(255,255,255,0.7);
+}
+
+/* CONTACT */
+.contact{
+  margin-top:20px;
+  padding:14px;
+  border-radius:16px;
+
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+}
+
+.contact p{
+  font-size:0.9rem;
+  margin:6px 0;
+  color:rgba(255,255,255,0.8);
+}
+
+.contact i{
+  color:#ff4db8;
+  margin-right:8px;
+}
+
+/* SOCIAL GRID */
+.socials{
+  margin-top:22px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.socials a{
+  height:55px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  border-radius:16px;
+
+  text-decoration:none;
+  color:#fff;
+
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+
+  transition:0.25s ease;
+}
+
+.socials a:hover{
+  transform:translateY(-4px);
+  background:linear-gradient(135deg,rgba(255,0,150,0.25),rgba(120,60,255,0.25));
+  box-shadow:0 0 25px rgba(255,0,150,0.2);
+}
+
+/* BUTTON */
+.btn{
+  margin-top:22px;
+  display:flex;
+  justify-content:center;
+}
+
+.btn a{
+  padding:13px 26px;
+  border-radius:40px;
+
+  text-decoration:none;
+  color:#fff;
+  font-weight:500;
+
+  background:linear-gradient(135deg,#ff2ea6,#7a3cff);
+  box-shadow:0 15px 35px rgba(255,0,150,0.25);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="card">
+
+  <div class="profile">
+    <div class="avatar">
+      <img src="your-image.jpg" alt="">
+    </div>
+  </div>
+
+  <div class="name">Albert Princewill</div>
+  <div class="role">Frontend Developer • UI Designer</div>
+
+  <div class="contact">
+    <p><i class="fa-solid fa-envelope"></i>albertcreates141@gmail.com</p>
+    <p><i class="fa-solid fa-location-dot"></i> Nigeria • Open for work</p>
+    <p><i class="fa-brands fa-whatsapp"></i> WhatsApp available; +2348131849565</p>
+  </div>
+
+  <!-- SOCIALS -->
+  <div class="socials">
+
+    <a href="https://www.instagram.com/albertcreates3?igsh=cWd0dWhkOWxzanFt" target="_blank">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+
+    <a href="https://www.facebook.com/profile.php?id=61550988072224" target="_blank">
+      <i class="fa-brands fa-facebook-f"></i>
+    </a>
+
+    <a href="https://www.youtube.com/@albertcreates-z9l" target="_blank">
+      <i class="fa-brands fa-youtube"></i>
+    </a>
+
+    <a href="https://x.com" target="_blank">
+      <i class="fa-brands fa-x-twitter"></i>
+    </a>
+
+    <a href="https://www.tiktok.com/@albertcreates3?_r=1&_t=ZS-96FuMuNnc4T" target="_blank">
+      <i class="fa-brands fa-tiktok"></i>
+    </a>
+
+<a 
+  href="https://wa.me/2348131849565" 
+  target="_blank"
+  aria-label="WhatsApp"
+>
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<a 
+  href="mailto:albertcreates141@gmail.com"
+  aria-label="Email"
+>
+  <i class="fa-solid fa-envelope"></i>
+</a>
+
+  </div>
+
+
+</div>
+
+</body>
+</html>

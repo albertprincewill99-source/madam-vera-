@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madam Vera - Gowns</title>
+
+  <link rel="stylesheet" href="gown.css">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+   <script defer src="app.js"></script>
+</head>
+  
+
+  <style>
+    .right-icons{
+      display:flex;
+      align-items:center;
+      gap:18px;
+    }
+
+    .cart-wrapper{
+      position:relative;
+      cursor:pointer;
+      font-size:20px;
+    }
+
+    #cart-count{
+      position:absolute;
+      top:-10px;
+      right:-10px;
+      background:red;
+      color:#fff;
+      width:18px;
+      height:18px;
+      border-radius:50%;
+      font-size:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    #cart-count.pop{
+      animation:pop 0.3s ease;
+    }
+
+    @keyframes pop{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.6);}
+      100%{transform:scale(1);}
+    }
+  </style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">Madam Vera</div>
+
+  <div class="right-icons">
+    <div class="cart-wrapper" onclick="goCart()">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span id="cart-count">0</span>
+    </div>
+       <a class="women" href="mensection.html">return</a>
+    <a class="back" href="index.html">Home</a>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-box">
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search bags..."
+    onkeyup="searchProducts()"
+  >
+</div>
+
+
+<!-- PRODUCTS -->
+<div class="products">
+
+  <div class="product">
+    <img src="baga.jpg">
+    <div class="overlay">
+      <h2>men side bag</h2>
+      <p>₦69,000</p>
+      <button onclick="addToCart('men side bag',60000,'baga.jpg',this)">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="product">
+    <img src="bagb.jpg">
+    <div class="overlay">
+      <h2>men cross body bag</h2>
+      <p>₦60,000</p>
+      <button onclick="addToCart('Green stripe jogger',60000,'bagb.jpg',this)">Add to Cart</button>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- SCRIPT -->  
+<script>  
+
+function addToCart(name, price, image, btn) {  
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];  
+
+  cart.push({  
+    name: name,  
+    price: Number(price),  
+    image: image  
+  });  
+
+  localStorage.setItem("cart", JSON.stringify(cart));  
+
+  updateCartCount();  
+
+  // Smooth feedback instead of alert  
+  if (btn) {  
+    let originalText = btn.innerText;  
+    btn.innerText = "Added to cart";  
+    btn.style.background = "#28a745";  
+    btn.disabled = true;  
+
+    setTimeout(() => {  
+      btn.innerText = originalText;  
+      btn.style.background = "";  
+      btn.disabled = false;  
+    }, 1200);  
+  }  
+}  
+
+
+function searchProducts(){
+
+  const input = document
+    .getElementById("searchInput")
+    .value
+    .toLowerCase();
+
+  const products = document.querySelectorAll(".product");
+
+  products.forEach(product => {
+
+    const title = product
+      .querySelector("h2")
+      .innerText
+      .toLowerCase();
+
+    if(title.includes(input)){
+
+      product.style.display = "block";
+
+    } else {
+
+      product.style.display = "none";
+
+    }
+
+  });
+
+}
+
+
+function updateCartCount() {  
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];  
+  document.getElementById("cart-count").innerText = cart.length;  
+}  
+
+function goCart() {  
+  window.location.href = "cart.html";  
+}  
+
+updateCartCount();  
+
+</script>  
+    <!-- CREATOR ID -->
+<div class="creator-id">
+  <div class="creator-glow"></div>
+
+  <h3>Designed by Albert Princewill</h3>
+
+  <p>
+    Frontend Developer • UI Designer • Creative Builder
+  </p>
+
+  <a href="Glass.html">
+    Contact Me
+  </a>
+</div>
+</body>
+</html>

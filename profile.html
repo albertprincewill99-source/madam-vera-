@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madam Vera - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { min-height: 100vh; display: flex; justify-content: center; align-items: center; background: url('profilepicture.jpg') center/cover no-repeat; position: relative; }
+    body::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
+    .login-box { position: relative; z-index: 1; width: 360px; padding: 35px; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; backdrop-filter: blur(25px); color: white; }
+    h2 { text-align: center; margin-bottom: 20px; }
+    .input-box { position: relative; margin-bottom: 18px; }
+    .input-box input { width: 100%; padding: 12px; background: transparent; border: none; border-bottom: 2px solid rgba(255,255,255,0.5); color: white; outline: none; }
+    .input-box label { position: absolute; left: 8px; top: 12px; color: rgba(255,255,255,0.7); transition: 0.2s; font-size: 0.85em; }
+    .input-box input:focus + label, .input-box input:not(:placeholder-shown) + label { top: -10px; font-size: 0.7em; color: hotpink; }
+    .toggle-eye { position: absolute; right: 10px; top: 12px; cursor: pointer; color: rgba(255,255,255,0.7); }
+    .login-btn { width: 100%; padding: 12px; margin-top: 10px; border: none; border-radius: 8px; cursor: pointer; background: white; font-weight: bold; }
+    .login-btn:hover { background: hotpink; color: white; }
+    .message { text-align: center; margin-top: 10px; font-size: 0.9em; display: none; }
+    .success { color: #00ff9d; }
+    .error { color: #ff4d6d; }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Login</h2>
+    <div class="input-box">
+      <input type="text" id="name" placeholder=" ">
+      <label>Name</label>
+    </div>
+    <div class="input-box">
+      <input type="email" id="email" placeholder=" ">
+      <label>Email</label>
+    </div>
+    <div class="input-box">
+      <input type="password" id="password" placeholder=" ">
+      <label>Password</label>
+      <i class="fa-solid fa-eye toggle-eye" onclick="togglePassword()"></i>
+    </div>
+    <button class="login-btn" onclick="signup()">Sign Up</button>
+    <button class="login-btn" onclick="login()">Login</button>
+    <div id="msg" class="message"></div>
+  </div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const app = initializeApp({
+  apiKey: "AIzaSyA04yP-zNj8i2pYIkL6PwarIHmNKjCXCAA",
+  authDomain: "madam-vera-7556e.firebaseapp.com",
+  projectId: "madam-vera-7556e",
+  storageBucket: "madam-vera-7556e.firebasestorage.app",
+  messagingSenderId: "853655764481",
+  appId: "1:853655764481:web:f03c28ddbef6a0e7db8a00"
+});
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+await setPersistence(auth, browserLocalPersistence);
+
+const msg = document.getElementById("msg");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+
+function show(text, ok) {
+  msg.style.display = "block";
+  msg.textContent = text;
+  msg.className = "message " + (ok ? "success" : "error");
+  setTimeout(() => msg.style.display = "none", 2000);
+}
+
+function redirectBack() {
+  const redirect = localStorage.getItem("redirectAfterLogin");
+  localStorage.removeItem("redirectAfterLogin");
+  window.location.href = redirect || "Mensmartwearstore.html"; // Default to product page
+}
+
+window.signup = async function () {
+  try {
+    const name = document.getElementById("name").value;
+    if (!name || !email.value || !password.value) {
+      show("Fill all fields", false);
+      return;
+    }
+    const cred = await createUserWithEmailAndPassword(auth, email.value, password.value);
+    await setDoc(doc(db, "users", cred.user.uid), { name, email: cred.user.email });
+    show("Account created", true);
+    setTimeout(redirectBack, 700);
+  } catch (e) {
+    show(e.message, false);
+  }
+};
+
+window.login = async function () {
+  try {
+    await signInWithEmailAndPassword(auth, email.value, password.value);
+    show("Login success", true);
+    setTimeout(redirectBack, 700);
+  } catch (e) {
+    show("Wrong credentials", false);
+  }
+};
+
+window.togglePassword = function () {
+  const p = document.getElementById("password");
+  const eye = document.querySelector(".toggle-eye");
+  p.type = p.type === "password" ? "text" : "password";
+  eye.classList.toggle("fa-eye-slash");
+};
+</script>
+</body>
+</html>

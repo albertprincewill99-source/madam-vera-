@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madam Vera - Bags</title>
+
+  <link rel="stylesheet" href="gown.css">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<script defer src="app.js"></script>
+</head>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">Madam Vera</div>
+
+  <div class="right-icons">
+    <div class="cart-wrapper" onclick="goCart()">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span id="cart-count">0</span>
+    </div>
+    <a class="women" href="Womensection.html">return</a>
+    <a class="back" href="index.html">Home</a>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-box">
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search..."
+    onkeyup="searchProducts()"
+  >
+</div>
+
+
+
+
+<!-- PRODUCTS -->
+<div class="products">
+
+  <div class="product">
+    <img src="mar.jpg">
+    <div class="overlay">
+      <h2>giant green woven bag</h2>
+      <p>₦100,000</p>
+      <button onclick="addToCart('giant green woven bag',100000,'mar.jpg',this)">Add to Cart</button>
+    </div>
+  </div>
+
+
+  <div class="product">
+    <img src="thu.jpg">
+    <div class="overlay">
+      <h2>white chanel hula hoop bag</h2>
+      <p>₦70,000</p>
+      <button onclick="addToCart('white chanel hula hoop bag',70000,'thu.jpg',this)">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="product">
+    <img src="wed.jpg">
+    <div class="overlay">
+      <h2>lilac handbag</h2>
+      <p>₦150,000</p>
+      <button onclick="addToCart('lilac handbag',150000,'wed.jpg',this)">Add to Cart</button>
+    </div>
+  </div>
+
+
+</div>
+    <!-- CREATOR ID -->
+<div class="creator-id">
+  <div class="creator-glow"></div>
+
+  <h3>Designed by Albert Princewill</h3>
+
+  <p>
+    Frontend Developer • UI Designer • Creative Builder
+  </p>
+
+  <a href="Glass.html">
+    Contact Me
+  </a>
+</div>
+</body>
+</html>

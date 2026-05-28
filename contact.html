@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Madam Vera</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+
+  <!-- CSS FILE -->
+  <link rel="stylesheet" href="Contact.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>Contact Us</h1>
+    <p>We respond quickly to orders and inquiries</p>
+
+    <!-- PHONE -->
+   <div class="card phone" onclick="copyNumber()">
+  📞 
+  <span id="phoneNumber" class="phone-text">08131849565</span>
+  <i class="fa-solid fa-copy copy-icon"></i>
+</div>
+    <!-- SOCIALS -->
+    <div class="card">
+      <div class="socials">
+        <a href="https://www.tiktok.com/@albertcreates3?_r=1&_t=ZS-96FuMuNnc4T"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61550988072224"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://www.instagram.com/albertcreates3?igsh=cWd0dWhkOWxzanFt"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@albertcreates-z9l"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+
+    <!-- ADDRESS -->
+    <div class="card address">
+      <i class="fa-solid fa-location-dot"></i>
+      <span>Port harcourt, Nigeria</span>
+    </div>
+
+    <a class="back" href="index.html">← Back to Home</a>
+
+  </div>
+  <script>
+  function copyNumber() {
+  const number = document.getElementById("phoneNumber").innerText;
+  navigator.clipboard.writeText(number);
+
+  // feedback
+  const icon = document.querySelector(".copy-icon");
+  icon.classList.add("copied");
+  icon.classList.replace("fa-copy", "fa-check");
+
+  setTimeout(() => {
+    icon.classList.remove("copied");
+    icon.classList.replace("fa-check", "fa-copy");
+  }, 1500);
+}
+  </script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+/* RESET */
+
+{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+
+/* BODY + BACKGROUND */
+body {
+font-family: 'Poppins', sans-serif;
+min-height: 100vh;
+overflow-x: hidden;
+
+background: url("kiss-image.jpg") center/cover no-repeat;
+position: relative;
+}
+
+/* DARK ANIMATED OVERLAY */
+body::before {
+content: "";
+position: fixed;
+inset: 0;
+
+background: rgba(0,0,0,0.75);
+animation: dimPulse 6s ease-in-out infinite;
+
+z-index: 0;
+}
+
+@keyframes dimPulse {
+0%   { background: rgba(0,0,0,0.78); }
+50%  { background: rgba(0,0,0,0.55); }
+100% { background: rgba(0,0,0,0.78); }
+}
+
+/* CONTAINER */
+.container {
+width: 90%;
+max-width: 600px;
+margin: auto;
+padding: 80px 0;
+
+position: relative;
+z-index: 2;
+
+animation: fadeIn 1s ease forwards;
+opacity: 0;
+}
+
+/* FADE IN */
+@keyframes fadeIn {
+from {
+opacity: 0;
+transform: translateY(30px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* TITLE */
+h1 {
+text-align: center;
+margin-bottom: 10px;
+font-size: 32px;
+
+background: linear-gradient(90deg, #ff4da6, #7a2cff);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+/* TEXT */
+p {
+text-align: center;
+color: #bbb;
+margin-bottom: 40px;
+font-size: 14px;
+}
+
+/* GLASS CARD */
+.card {
+background: rgba(255, 255, 255, 0.06);
+border: 1px solid rgba(255, 255, 255, 0.1);
+
+backdrop-filter: blur(15px);
+-webkit-backdrop-filter: blur(15px);
+
+border-radius: 18px;
+padding: 20px;
+margin-bottom: 18px;
+
+box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+
+opacity: 0;
+transform: translateY(20px);
+animation: slideUp 0.8s ease forwards;
+}
+
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.4s; }
+.card:nth-child(4) { animation-delay: 0.6s; }
+
+/* SLIDE UP */
+@keyframes slideUp {
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* PHONE */
+.phone a {
+color: #ff4da6;
+font-size: 20px;
+text-decoration: none;
+font-weight: 600;
+}
+
+/* SOCIAL ICONS */
+.socials {
+display: flex;
+justify-content: center;
+gap: 25px;
+font-size: 26px;
+}
+
+.socials a {
+color: white;
+transition: 0.3s;
+}
+
+.socials a:hover {
+transform: scale(1.2);
+color: #ff4da6;
+}
+
+/* ADDRESS */
+.address {
+text-align: center;
+color: #ccc;
+font-size: 14px;
+}
+
+.address i {
+color: #ff4da6;
+margin-right: 8px;
+}
+
+/* BACK BUTTON */
+.back {
+display: block;
+text-align: center;
+margin-top: 25px;
+color: #ff4da6;
+text-decoration: none;
+font-weight: 500;
+}
+
+.back:hover {
+text-decoration: underline;
+}
+
+.phone {
+cursor: pointer;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.copy-icon {
+margin-left: auto;
+opacity: 0.6;
+transition: 0.3s;
+}
+
+.phone:hover .copy-icon {
+opacity: 1;
+}
+
+.copy-icon.copied {
+color: #ff4d8d; /* your pink vibe */
+}
+.phone-text:hover {
+text-decoration: underline;
+}
+
+.copy-icon {
+margin-left: auto;
+opacity: 0.6;
+transition: 0.3s;
+}
+
+.phone-text {
+color: #ff4d8d;
+font-weight: 500;
+letter-spacing: 1px;
+transition: 0.3s;
+}
+
+.phone:hover .phone-text {
+opacity: 0.8;
+}
+

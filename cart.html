@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madam Vera Cart</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+
+</head>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:Poppins;
+  background:#070707;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* ===== GLASS BACKGROUND ===== */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.9)),
+  url("open.jpg") center/cover no-repeat;
+  z-index:-2;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  backdrop-filter:blur(16px);
+  z-index:-1;
+}
+
+
+  
+/* ===== PAGE ===== */
+.container{
+  padding:20px 6%;
+}
+
+.title{
+  font-size:1.4rem;
+  margin:10px 0;
+}
+
+/* ===== CART SLIDER ===== */
+.items{
+  display:flex;
+  gap:18px;
+  overflow-x:auto;
+  padding:20px 0;
+  scroll-snap-type:x mandatory;
+}
+
+.items::-webkit-scrollbar{display:none;}
+
+.card{
+  min-width:260px;
+  border-radius:28px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  backdrop-filter:blur(20px);
+  overflow:hidden;
+  scroll-snap-align:center;
+  transition:0.4s;
+  transform:scale(0.92);
+}
+
+.card.focus{
+  filter:blur(0);
+  transform:scale(1);
+}
+
+.img-box{
+  height:250px;
+}
+
+.img-box img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.info{
+  padding:15px;
+}
+
+.qty{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-top:10px;
+}
+
+.qty button{
+  width:30px;
+  height:30px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.remove{
+  margin-top:10px;
+  padding:6px 10px;
+  background:red;
+  border:none;
+  color:#fff;
+  border-radius:10px;
+}
+  
+  /* ===== TOP AD SLIDER ===== */
+
+.hero-slider{
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* TRACK */
+.hero-track{
+  display: flex;
+  height: 100%;
+  transition: transform 0.6s ease;
+  will-change: transform;
+  touch-action: pan-y;
+}
+
+/* EACH SLIDE (IMPORTANT FIX) */
+.hero-slide{
+  min-width: 100%;
+  height: 180px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* MEDIA */
+.hero-slide img,
+.hero-slide video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  filter: brightness(0.82) saturate(1.05);
+}
+
+/* TEXT OVERLAY */
+.hero-text{
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+
+  color: #fff;
+  font-size: 14px;
+
+  background: rgba(0,0,0,0.4);
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+/* SOFT FADE (BOTTOM CINEMATIC BLEND) */
+.hero-slider::after{
+  content: "";
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 90px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0),
+    rgba(7,7,7,0.6),
+    #070707
+  );
+
+  pointer-events: none;
+}
+
+/* ===== SUMMARY ===== */
+.summary{
+  margin-top:25px;
+  background:rgba(255,255,255,0.06);
+  padding:18px;
+  border-radius:25px;
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  margin:8px 0;
+}
+
+.final{
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:10px;
+  font-weight:600;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  border:none;
+  border-radius:15px;
+  cursor:pointer;
+}
+
+.discount{background:rgba(255,255,255,0.1);color:#fff;}
+.checkout{background:#fff;color:#000;font-weight:600;}
+
+/* ===== MODAL ===== */
+.modal{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.7);
+
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+}
+
+.modal.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.modal-box{
+  width:90%;
+  max-width:400px;
+  background:#111;
+  padding:20px;
+  border-radius:20px;
+}
+
+.modal-box input{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border:none;
+  border-radius:10px;
+}
+  
+  
+  /* TOAST */
+#toast{
+  position:fixed;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%) translateY(40px);
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.15);
+  color:#fff;
+  padding:16px 26px;
+  border-radius:20px;
+  font-size:14px;
+  z-index:99999;
+  opacity:0;
+  transition:0.4s;
+  box-shadow:0 10px 40px rgba(0,0,0,0.4);
+}
+
+#toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* LOADER */
+#loader{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(12px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  z-index:999999;
+  opacity:0;
+  pointer-events:none;
+  transition:0.4s;
+}
+
+#loader.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.loader-dots{
+  display:flex;
+  gap:10px;
+}
+
+.loader-dots span{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#fff;
+  animation:bounce 0.6s infinite alternate;
+}
+
+.loader-dots span:nth-child(2){
+  animation-delay:0.2s;
+}
+
+.loader-dots span:nth-child(3){
+  animation-delay:0.4s;
+}
+
+@keyframes bounce{
+  from{
+    transform:translateY(0);
+    opacity:0.4;
+  }
+
+  to{
+    transform:translateY(-10px);
+    opacity:1;
+  }
+}
+
+#loader p{
+  margin-top:20px;
+  color:#fff;
+  font-size:15px;
+  letter-spacing:1px;
+}
+
+/* MODAL SMOOTH */
+.modal{
+  opacity:0;
+  pointer-events:none;
+  transition:0.4s;
+}
+
+.modal.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+  .home-btn{
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+
+.home-btn:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.15);
+}
+  
+</style>
+</head>
+
+<body>
+
+<div class="hero-slider" id="heroSlider">
+  <div class="hero-track" id="heroTrack">
+
+    <div class="hero-slide">
+     <img src="hero.jpg"> 
+      <div class="hero-text">New Arrivals</div>
+    </div>
+
+    <div class="hero-slide">
+      <img src="eye.jpg">
+      <div class="hero-text">Luxury Collection</div>
+    </div>
+
+    <div class="hero-slide">
+      <video autoplay muted loop>
+        <source src="pin.mp4" type="video/mp4">
+      </video>
+      <div class="hero-text">Watch Our Story</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container">
+
+<div class="title">Your Cart</div>
+
+<div class="items" id="items"></div>
+
+<div class="summary">
+  <div class="row"><span>Subtotal</span><span id="subtotal">₦0</span></div>
+  <div class="row"><span>Discount</span><span>₦0</span></div>
+  <div class="row final"><span>Final</span><span id="total">₦0</span></div>
+
+  <button class="discount" onclick="checkDiscount()">Check Discount</button>
+  <button class="checkout" onclick="openCheckout()">Checkout</button>
+  <button class="home-btn" onclick="goHome()">Back to Home</button>
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    
+   <input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone">
+<input id="email" placeholder="Email Address">
+<input id="address" placeholder="Address">
+    
+    <button class="checkout" onclick="placeOrder()">Place Order</button>
+  </div>
+</div>
+
+<!-- ONLY FIXED FIREBASE WIRING -->
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBVthkqqOt4HVMKl5gOidQwbRzwhkDgF5E",
+  authDomain: "vera-c0a8e.firebaseapp.com",
+  databaseURL: "https://vera-c0a8e-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "vera-c0a8e",
+  storageBucket: "vera-c0a8e.firebasestorage.app",
+  messagingSenderId: "90309466128",
+  appId: "1:90309466128:web:aa16275cfcb4c671e75295"
+};
+
+/* FIREBASE INIT */
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+const db = firebase.database();
+
+/* CART */
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+/* RENDER CART */
+function render() {
+  const box = document.getElementById("items");
+  if (!box) return;
+
+  box.innerHTML = "";
+
+  cart.forEach((item, i) => {
+    const div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+      <div class="img-box">
+        <img src="${item.image || '10.jpg'}">
+      </div>
+
+      <div class="info">
+        <div>${item.name || "Unnamed Item"}</div>
+        <div>₦${Number(item.price || 0).toLocaleString()}</div>
+
+        <div class="qty">
+          <button onclick="minus(${i})">-</button>
+          <span>${item.qty || 1}</span>
+          <button onclick="plus(${i})">+</button>
+        </div>
+
+        <button class="remove" onclick="removeItem(${i})">Remove</button>
+      </div>
+    `;
+
+    box.appendChild(div);
+  });
+
+  calc();
+  setupCenterFocus();
+}
+
+/* QTY */
+function plus(i) {
+  cart[i].qty = (cart[i].qty || 1) + 1;
+  save();
+}
+
+function minus(i) {
+  cart[i].qty = Math.max(1, (cart[i].qty || 1) - 1);
+  save();
+}
+
+function removeItem(i) {
+  cart.splice(i, 1);
+  save();
+}
+
+function save() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+  render();
+}
+
+/* TOTAL */
+function calc() {
+  let sub = 0;
+
+  cart.forEach(i => {
+    sub += Number(i.price || 0) * (i.qty || 1);
+  });
+
+  const subEl = document.getElementById("subtotal");
+  const totalEl = document.getElementById("total");
+
+  if (subEl) subEl.innerText = "₦" + sub.toLocaleString();
+  if (totalEl) totalEl.innerText = "₦" + sub.toLocaleString();
+}
+
+/* DISCOUNT */
+function checkDiscount() {
+  showToast("Zero discount available");
+}
+
+/* MODAL */
+function openCheckout() {
+  document.getElementById("modal").classList.add("show");
+}
+
+const modal = document.getElementById("modal");
+
+if (modal) {
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("show");
+    }
+  });
+}
+
+/* ORDER (FIXED FIREBASE STRUCTURE) */
+function placeOrder() {
+
+  const name = document.getElementById("name")?.value.trim();
+  const phone = document.getElementById("phone")?.value.trim();
+  const address = document.getElementById("address")?.value.trim();
+  const email = document.getElementById("email")?.value.trim();
+
+  if (!name || !phone || !address) {
+    showToast("Fill all required fields");
+    return;
+  }
+
+  if (email && !email.includes("@")) {
+    showToast("Enter a valid email");
+    return;
+  }
+
+  if (cart.length === 0) {
+    showToast("Cart is empty");
+    return;
+  }
+
+  document.getElementById("loader")?.classList.add("show");
+
+  const id = "MV-" + Date.now();
+
+  /* CLEAN ITEMS */
+  const formattedItems = cart.map(item => ({
+    name: item.name,
+    price: Number(item.price || 0),
+    qty: item.qty || 1,
+    image: item.image || ""
+  }));
+
+  const total = formattedItems.reduce((a, b) => a + b.price * b.qty, 0);
+
+  db.ref("orders/" + id).set({
+    orderId: id,
+    items: formattedItems,
+    total,
+    name,
+    phone,
+    email: email || "not provided",
+    address,
+    createdAt: Date.now()
+  })
+  .then(() => {
+
+    /* ================= TELEGRAM ALERT ================= */
+    const botToken = "8751636734:AAFUshGsrBWQAhk8p83rYPCBcN1_ZpuoAXE";
+    const chatId = "8712315637";
+
+    const message =
+`🛍 NEW ORDER
+
+👤 Name: ${name}
+📞 Phone: ${phone}
+📧 Email: ${email || "not provided"}
+🏠 Address: ${address}
+
+🧾 Items:
+${formattedItems.map(i => `- ${i.name} x${i.qty}`).join("\n")}
+
+💰 Total: ₦${total}
+
+⏰ Time: ${new Date().toLocaleString()}`;
+
+    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: message
+      })
+    });
+    /* =================================================== */
+
+    document.getElementById("loader")?.classList.remove("show");
+
+    showToast("Your order has been recorded successfully. This is a sample checkout system — payment is currently inactive. We’ll reach out shortly for confirmation.");
+
+    localStorage.removeItem("cart");
+
+    setTimeout(() => {
+      location.reload();
+    }, 1200);
+
+  })
+  .catch(err => {
+
+    console.log(err);
+
+    document.getElementById("loader")?.classList.remove("show");
+
+    showToast("Network error. Try again");
+
+  });
+}
+/* TOAST */
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  if (!t) return;
+
+  t.innerText = msg;
+  t.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => {
+    t.classList.remove("show");
+  }, 2500);
+}
+
+/* CENTER FOCUS (FIXED & STABLE) */
+function setupCenterFocus() {
+  const container = document.getElementById("items");
+  if (!container) return;
+
+  const cards = container.querySelectorAll(".card");
+  if (!cards.length) return;
+
+  function updateFocus() {
+    const center = container.scrollLeft + container.offsetWidth / 2;
+
+    let closest = 0;
+    let dist = Infinity;
+
+    cards.forEach((card, i) => {
+      const c = card.offsetLeft + card.offsetWidth / 2;
+      const d = Math.abs(center - c);
+
+      if (d < dist) {
+        dist = d;
+        closest = i;
+      }
+    });
+
+    cards.forEach(c => c.classList.remove("focus"));
+    if (cards[closest]) cards[closest].classList.add("focus");
+  }
+
+  container.addEventListener("scroll", updateFocus);
+  window.addEventListener("resize", updateFocus);
+
+  updateFocus();
+}
+
+/* INIT */
+render();
+
+/* HERO SLIDER (SAFE FIX - ONLY RUN IF EXISTS) */
+const track = document.getElementById("heroTrack");
+
+if (track) {
+
+  let index = 0;
+  let startX = 0;
+  let isDragging = false;
+  let autoSlide;
+
+  function updateSlide() {
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  function startAuto() {
+    clearInterval(autoSlide);
+    autoSlide = setInterval(() => {
+      index = (index + 1) % 3;
+      updateSlide();
+    }, 4000);
+  }
+
+  function stopAuto() {
+    clearInterval(autoSlide);
+  }
+
+  function startDrag(e) {
+    isDragging = true;
+    startX = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
+    stopAuto();
+  }
+
+  function moveDrag(e) {
+    if (!isDragging) return;
+
+    let x = e.type.includes("mouse") ? e.clientX : e.touches[0].clientX;
+    let diff = x - startX;
+
+    track.style.transition = "none";
+    track.style.transform = `translateX(calc(-${index * 100}% + ${diff}px))`;
+  }
+
+  function endDrag(e) {
+    if (!isDragging) return;
+    isDragging = false;
+
+    let endX = e.type.includes("mouse")
+      ? e.clientX
+      : (e.changedTouches ? e.changedTouches[0].clientX : startX);
+
+    let diff = endX - startX;
+
+    track.style.transition = "0.5s ease";
+
+    if (diff > 60 && index > 0) index--;
+    else if (diff < -60 && index < 2) index++;
+
+    updateSlide();
+    startAuto();
+  }
+
+  track.addEventListener("mousedown", startDrag);
+  track.addEventListener("mousemove", moveDrag);
+  track.addEventListener("mouseup", endDrag);
+  track.addEventListener("mouseleave", endDrag);
+
+  track.addEventListener("touchstart", startDrag);
+  track.addEventListener("touchmove", moveDrag);
+  track.addEventListener("touchend", endDrag);
+
+  updateSlide();
+  startAuto();
+  
+  function goHome(){
+  window.location.href = "index.html";
+}
+}
+</script>
+
+<!-- PREMIUM TOAST -->
+<div id="toast"></div>
+
+<!-- PROCESSING OVERLAY -->
+<div id="loader">
+  <div class="loader-dots">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <p>Processing your order...</p>
+</div>
+</body>
+</html>
