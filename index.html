@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- BASIC META -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- GOOGLE SITE VERIFICATION -->
+  <meta name="google-site-verification" content="ys4ryYcneDZGqDx-6XucXjZDHTlRxMMyzkzeMxMdCdw" />
+
+  <!-- PRIMARY TITLE -->
+  <title>Madam Vera Fashion | AC (Albert Creates) - Web Developer & Fashion Brand</title>
+
+  <!-- SEO DESCRIPTION -->
+  <meta name="description" content="Madam Vera Fashion is a luxury unisex fashion brand created by AC (Albert Creates), a Nigerian frontend web developer and UI designer. Shop modern fashion collections, explore creative ecommerce experiences, and discover professional web development services.">
+
+  <!-- SEO KEYWORDS -->
+  <meta name="keywords" content="Madam Vera Fashion, AC Albert Creates, Albert Princewill, Nigerian web developer, frontend developer Nigeria, UI designer Nigeria, ecommerce website designer, fashion store online, luxury fashion brand, unisex fashion, Port Harcourt web developer, fashion website designer, responsive web design, online clothing store, creative developer Nigeria">
+
+  <!-- AUTHOR -->
+  <meta name="author" content="Albert Princewill - AC (Albert Creates)">
+
+  <!-- MOBILE THEME -->
+  <meta name="theme-color" content="#0a0a0a">
+
+  <!-- FAVICON -->
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- CANONICAL URL -->
+  <link rel="canonical" href="https://madam-vera.pages.dev/">
+
+  <!-- OPEN GRAPH / WHATSAPP / FACEBOOK -->
+  <meta property="og:title" content="Madam Vera Fashion | AC (Albert Creates)">
+  <meta property="og:description" content="Luxury fashion brand and creative web development portfolio by AC (Albert Creates).">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://madam-vera.pages.dev/">
+  <meta property="og:image" content="https://madam-vera.pages.dev/preview.jpg">
+
+  <!-- TWITTER / X PREVIEW -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Madam Vera Fashion | AC (Albert Creates)">
+  <meta name="twitter:description" content="Luxury unisex fashion and modern web development by AC (Albert Creates).">
+  <meta name="twitter:image" content="https://madam-vera.pages.dev/preview.jpg">
+
+  <!-- SEARCH ENGINE INDEXING -->
+  <meta name="robots" content="index, follow">
+
+  <!-- PERFORMANCE -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- JAVASCRIPT -->
+  <script defer src="script.js"></script>
+
+  <!-- STRUCTURED DATA FOR GOOGLE -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Madam Vera Fashion",
+    "url": "https://madam-vera.pages.dev/",
+    "logo": "https://madam-vera.pages.dev/favicon.png",
+    "sameAs": [
+      "https://www.instagram.com/albertcreates3",
+      "https://www.youtube.com/@albertcreates-z9l",
+      "https://www.tiktok.com/@albertcreates3",
+      "https://www.facebook.com/profile.php?id=61550988072224"
+    ],
+    "founder": {
+      "@type": "Person",
+      "name": "Albert Princewill"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">Madam Vera</div>
+
+    <div class="socials">
+      <a href="https://www.tiktok.com/@albertcreates3?_r=1&_t=ZS-96FuMuNnc4T" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="https://www.facebook.com/profile.php?id=61550988072224" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://www.youtube.com/@albertcreates-z9l" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://www.instagram.com/albertcreates3?igsh=cWd0dWhkOWxzanFt" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+
+    <!-- MENU BUTTON -->
+    <div class="menu" onclick="toggleMenu(event)">☰</div>
+  </header>
+
+  <!-- SIDE NAV -->
+  <div id="sidenav" class="sidenav">
+    <a href="index.html">Home</a>
+    <a href="mensection.html">Men</a>
+    <a href="Womensection.html">Women</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://www.facebook.com/profile.php?id=61550988072224">Facebook</a>
+    <a href="https://www.tiktok.com/@albertcreates3?_r=1&_t=ZS-96FuMuNnc4T">TikTok</a>
+    <a href="https://www.instagram.com/albertcreates3?igsh=cWd0dWhkOWxzanFt">Instagram</a>
+    <a href="https://www.youtube.com/@albertcreates-z9l">YouTube</a>
+  </div>
+
+  <!-- DARK OVERLAY -->
+  <div id="overlay" class="overlay-bg"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Fashion<br>Redefined</h1>
+    <p>Style that speaks for everyone</p>
+  </section>
+
+  <!-- COLLECTION -->
+  <section class="collection">
+
+    <div class="card">
+      <video autoplay muted loop playsinline>
+        <source src="pink.mp4" type="video/mp4">
+      </video>
+      <button class="btn" onclick="goToWomen()">Women</button>
+    </div>
+
+    <div class="card">
+      <video autoplay muted loop playsinline>
+        <source src="pink 2.mp4" type="video/mp4">
+      </video>
+      <button class="btn" onclick="goToMen()">Men</button>
+    </div>
+
+  </section>
+
+<!-- ABOUT + CONTACT -->
+<section class="about">
+  <h2>About Madam Vera Fashion</h2>
+
+  <p>
+    Welcome to Madam Vera Fashion, a modern fashion brand built around elegance, confidence, and creative expression.
+    We focus on delivering stylish and high-quality clothing for men and women who appreciate fashion that speaks with simplicity, class, and identity.
+  </p>
+
+  <p>
+    Madam Vera Fashion is not just a clothing brand—it is also a creative digital experience designed and developed by
+    Albert Princewill (AC Creates), a Nigerian frontend web developer and UI designer. The goal of this platform is to
+    combine fashion with modern web technology, creating a smooth and engaging experience for every visitor.
+  </p>
+
+  <p>
+    Our collections are designed to reflect comfort, luxury, and everyday style. Whether you are exploring new outfits or
+    looking for inspiration, Madam Vera Fashion is built to help you express yourself through what you wear.
+  </p>
+
+  <h2>Contact Information</h2>
+
+  <p><strong>Name:</strong> Albert Princewill (AC Creates)</p>
+
+  <p><strong>Email:</strong> albertcreates3@gmail.com</p>
+
+  <p><strong>Phone / WhatsApp:</strong> +234 8131849565</p>
+
+  <p>
+    <strong>Instagram:</strong>
+    <a href="https://www.instagram.com/albertcreates3" target="_blank">Click here</a>
+  </p>
+
+  <p>
+    <strong>TikTok:</strong>
+    <a href="https://www.tiktok.com/@albertcreates3" target="_blank">Click here</a>
+  </p>
+
+  <p>
+    <strong>YouTube:</strong>
+    <a href="https://www.youtube.com/@albertcreates-z9l" target="_blank">Click here</a>
+  </p>
+
+  <p>
+    <strong>Facebook:</strong>
+    <a href="https://www.facebook.com/profile.php?id=61550988072224" target="_blank">Click here</a>
+  </p>
+
+  <h2>Services</h2>
+
+  <p>
+    I also offer professional web development services including frontend development, UI/UX design,
+    ecommerce website creation, and responsive website design for businesses and brands.
+  </p>
+</section>
+
+  <!-- FLOAT BUTTON -->
+  <div class="fab" onclick="toggleIcons(event)">+</div>
+
+  <!-- ICON BAR -->
+  <div class="icon-bar" id="iconBar">
+    <div class="cart-icon" onclick="goCart()">  
+      <i class="fa-solid fa-cart-shopping"></i>  
+      <span id="cart-count">0</span>  
+    </div>  
+    
+  </div>
+
+  <!-- SCRIPT -->
+<!-- CREATOR ID -->
+<div class="creator-id">
+  <div class="creator-glow"></div>
+
+  <h3>Designed by Albert Princewill</h3>
+
+  <p>
+    Frontend Developer • UI Designer • Creative Builder
+  </p>
+
+  <a href="Glass.html">
+    Contact Me
+  </a>
+</div>
+</body>
+</html>
